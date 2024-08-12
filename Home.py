@@ -10,9 +10,19 @@ import streamlit as st
 import pandas as pd
 import os
 
-# Download NLTK datasets
-nltk.download('punkt')
-nltk.download('stopwords')
+# Tentukan direktori khusus untuk data NLTK
+nltk_data_path = os.path.join(os.getcwd(), 'nltk_data')
+
+# Pastikan direktori ini ada
+if not os.path.exists(nltk_data_path):
+    os.makedirs(nltk_data_path)
+
+# Setel path data NLTK
+nltk.data.path.append(nltk_data_path)
+
+# Download data jika belum ada
+nltk.download('punkt', download_dir=nltk_data_path)
+nltk.download('stopwords', download_dir=nltk_data_path)
 
 # Set up the Streamlit page
 st.set_page_config(page_title="CSV Viewer", page_icon="📊")
